@@ -67,7 +67,7 @@ public class EnumSetJpaConverter extends AbstractProcessor {
                 .addCode(CodeBlock.builder().add("if (dbData != null) {return $T.valueOf(dbData);}return null;", originName).build())
                 .build());
 
-        builder.addAnnotation(AnnotationSpec.builder(Converter.class).addMember("autoApply", "&L", true).build());
+        builder.addAnnotation(AnnotationSpec.builder(Converter.class).addMember("autoApply", "$L", true).build());
         TypeSpec enumConverterbuild = builder.build();
 
         JavaFile sourceCode = JavaFile.builder(packageName, enumConverterbuild).build();
