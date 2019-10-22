@@ -52,14 +52,14 @@ public class EnumSetJpaConverter extends AbstractProcessor {
         TypeSpec.Builder builder = TypeSpec.classBuilder(simpleName);
         builder.addSuperinterface(ParameterizedTypeName.get(ClassName.get(AttributeConverter.class), originName, ClassName.get(String.class)));
         builder.addModifiers(Modifier.PUBLIC);
-        builder.addMethod(MethodSpec.methodBuilder("converterToDatabaseColumn")
+        builder.addMethod(MethodSpec.methodBuilder("convertToDatabaseColumn")
                 .addModifiers(Modifier.PUBLIC)
                 .returns(String.class)
                 .addParameter(ParameterSpec.builder(originName, "attribute").build())
                 .addAnnotation(Override.class)
                 .addCode(CodeBlock.builder().add("if (attribute != null) { return attribute.name();}return null;").build())
                 .build());
-        builder.addMethod(MethodSpec.methodBuilder("converterToEntityAttribute")
+        builder.addMethod(MethodSpec.methodBuilder("convertToEntityAttribute")
                 .addModifiers(Modifier.PUBLIC)
                 .returns(originName)
                 .addParameter(ParameterSpec.builder(String.class, "dbData").build())
